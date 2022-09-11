@@ -1,0 +1,22 @@
+{
+    "name": "EasyTerm",
+    "version": "0.1.0",
+    "manifest_version": 3,
+    "description": "A chrome extension for displaying difficult words about IT and DX.",
+    "content_scripts": [
+        {
+            "matches": [
+                "<all_urls>"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ],
+    "permissions": ["scripting"],
+    "optional_permissions": ["tabs"],
+    "host_permissions": ["<all_urls>"],
+    "content_security_policy": { 
+        "extension_pages": "script-src 'self'; object-src 'self'"
+    }
+}
