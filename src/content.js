@@ -4,6 +4,11 @@ const word_list = ["CPU","RAM"];
 // ボタンのidようにボタンの数を数え上げる
 const button_num = 0;
 
+// ポップアップをページの一番上に追加する
+const popup = document.createElement('div');
+popup.setAttribute('class', 'easy-term-popup');
+document.body.appendChild(popup);
+
 // ボタン押下時に実行される関数
 function OnClickLink(word) {
     alert(word);
