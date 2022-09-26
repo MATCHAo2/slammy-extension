@@ -5,10 +5,10 @@ const word_list = [
 ];
 
 // ボタンのidようにボタンの数を数え上げる
-const button_num = 0;
+let button_num = 0;
 
 // ポップアップをページの一番上に追加する
-const popup = document.createElement('div');
+let popup = document.createElement('div');
 popup.setAttribute('class', 'easy-term-popup');
 document.body.appendChild(popup);
 
