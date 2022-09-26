@@ -10,14 +10,16 @@ let button_num = 0;
 // ポップアップをページの一番上に追加する
 let popup = document.createElement('div');
 popup.setAttribute('class', 'easy-term-popup');
+popup.style.width = '100px';
+popup.style.height = '100px';
+popup.style.backgroundColor = '#ffffff';
+popup.style.position = 'absolute';
+popup.style.visibility = 'hidden';
+popup.style.border = 'solid';
 document.body.appendChild(popup);
 
-// ポップアップを表示させる関数
-function renderPopup(mouseX, mouseY, selection) {
-    popup.innerHTML = selection;
-    popup.style.top = mouseY + 'px';
-    popup.style.left = mouseX + 'px';
-    popup.style.visibility = 'visible';
+// ポップアップを表示する関数
+function renderPopup() {
 }
 
 // webページの<p>要素のリスト
@@ -47,15 +49,13 @@ for (let i=0; i<paragraphs.length; i++) {
 for (let i=0; i<button_num; i++) {
     let button = document.getElementById(`easy-term-auto-${i}`);
     button.addEventListener('click', function (event) {
-        if (popup.style.visibility !== 'hidden') {
-            // popupが表示されている場合、クリックしたときに非表示にする
-            popup.style.visibility === 'hidden';
+        if (popup.style.visibility === 'hidden') {
+            popup.innerText = button.innerText;
+            popup.style.left = event.clientX + 'px';
+            popup.style.top = event.clientY + 'px';
+            popup.style.visibility = 'visible';
         } else {
-            // popupが表示されていない場合、クリックしたときにカーソルの近くに表示するようにする
-            let selection = window.getSelection().toString();
-            if (selection.length > 0) {
-                renderPopup(event.clientX, event.clientY, selection);
-            }
+            popup.style.visibility = 'hidden';
         }
     });
 }
