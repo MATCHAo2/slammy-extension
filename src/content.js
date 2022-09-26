@@ -51,8 +51,8 @@ for (let i=0; i<button_num; i++) {
     button.addEventListener('click', function (event) {
         if (popup.style.visibility === 'hidden') {
             popup.innerText = button.innerText;
-            popup.style.left = event.clientX + 'px';
-            popup.style.top = event.clientY + 'px';
+            popup.style.left = event.pageX + 'px';
+            popup.style.top = event.pageY + 'px';
             popup.style.visibility = 'visible';
         } else {
             popup.style.visibility = 'hidden';
