@@ -13,7 +13,7 @@ popup.setAttribute('class', 'easy-term-popup');
 document.body.appendChild(popup);
 
 // ポップアップを表示させる関数
-function () renderPopup(mouseX, mouseY, selection) {
+function renderPopup(mouseX, mouseY, selection) {
     popup.innerHTML = selection;
     popup.style.top = mouseY + 'px';
     popup.style.left = mouseX + 'px';
@@ -21,13 +21,13 @@ function () renderPopup(mouseX, mouseY, selection) {
 }
 
 // webページの<p>要素のリスト
-const paragraphs = document.querySelectorAll("p");
+let paragraphs = document.querySelectorAll("p");
 
 // paragraphsに入った各要素ごとに処理
 for (let i=0; i<paragraphs.length; i++) {
     // paragraphはparagraphsの上からi番目の要素
-    const paragraph = paragraphs[i];
-    const tmp = "";
+    let paragraph = paragraphs[i];
+    let tmp = "";
     
     // 単語一つ一つに対して処理
     for (let j=0; j<word_list.length; j++) {
@@ -45,14 +45,14 @@ for (let i=0; i<paragraphs.length; i++) {
 
 // ボタンクリックを監視し、クリック時の動作を決める
 for (let i=0; i<button_num; i++) {
-    const button = document.getElementById(`easy-term-auto-${i}`);
+    let button = document.getElementById(`easy-term-auto-${i}`);
     button.addEventListener('click', function (event) {
         if (popup.style.visibility !== 'hidden') {
             // popupが表示されている場合、クリックしたときに非表示にする
             popup.style.visibility === 'hidden';
         } else {
             // popupが表示されていない場合、クリックしたときにカーソルの近くに表示するようにする
-            const selection = window.getSelection().toString();
+            let selection = window.getSelection().toString();
             if (selection.length > 0) {
                 renderPopup(event.clientX, event.clientY, selection);
             }
