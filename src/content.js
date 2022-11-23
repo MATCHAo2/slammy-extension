@@ -42,7 +42,7 @@ for (let i=0; i<paragraphs.length; i++) {
     // 単語一つ一つに対して処理
     for (let j=0; j<word_list.length; j++) {
         // paragraph内の用語をボタンに置換したものをtmpに代入する
-         tmp = paragraph.innerHTML.replace(word_list[j]['word'], `<a type="button" id='easy-term-auto-${button_num}'>${word_list[j]['word']}</a>`);
+         tmp = paragraph.innerHTML.replace(word_list[j]['word'], `${word_list[j]['word']}<a type="button" id='easy-term-auto-${button_num}' name='${word_list[j]['word']}' style='font-size:30%'>解説</a>`);
          // paragraphとtmpが異なればparagraphのinnerHTMLをtmpに置換
          if (tmp !== paragraph.innerHTML) {
             paragraph.innerHTML = tmp;
@@ -59,8 +59,8 @@ for (let i=0; i<button_num; i++) {
     button.addEventListener('click', function (event) {
         if (popup.style.visibility === 'hidden') {
             for (let j=0; j<word_list.length; j++){
-                if (button.innerText === word_list[j]['word']) {
-                    popup.innerHTML = `<h1>${button.innerText}とは</h1><br><p>${word_list[j]['short_description']}</p>`;
+                if (button.name === word_list[j]['word']) {
+                    popup.innerHTML = `<h1>${button.name}とは</h1><br><p>${word_list[j]['short_description']}</p>`;
                 }
             }
             popup.style.right = 30 + 'px';
