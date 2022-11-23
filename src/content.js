@@ -1,7 +1,20 @@
 // 用語リスト(暫定)
 const word_list = [
-    ["CPU","CPUとは、コンピュータにおける中心的な処理装置。人間の部位に例えると、頭脳とされることが多い。"],
-    ["RAM", "RAMとは、コンピュータで使用するメモリの一分類である。人間の道具に例えると、作業台とされることが多い。"],
+    {
+        "id": 5,
+        "word": "CPU",
+        "short_description": "中央演算処理装置の略"
+    },
+    {
+        "id": 6,
+        "word": "Ps",
+        "short_description": "PhotoShop(フォトショップ)の略称。画像編集ソフトPhotoshop。"
+    },
+    {
+        "id": 7,
+        "word": "Ai",
+        "short_description": "Illustration(イラストレーター)の略称。グラフィックデザインソフト。"
+    }
 ];
 
 // ボタンのidようにボタンの数を数え上げる
@@ -10,13 +23,8 @@ let button_num = 0;
 // ポップアップをページの一番上に追加する
 let popup = document.createElement('div');
 popup.setAttribute('class', 'easy-term-popup');
-popup.style.width = '100px';
-popup.style.height = '100px';
-popup.style.backgroundColor = '#ffffff';
-popup.style.position = 'absolute';
-popup.style.visibility = 'hidden';
-popup.style.border = 'solid';
 document.body.appendChild(popup);
+
 
 // ポップアップを表示する関数
 function renderPopup() {
@@ -34,7 +42,7 @@ for (let i=0; i<paragraphs.length; i++) {
     // 単語一つ一つに対して処理
     for (let j=0; j<word_list.length; j++) {
         // paragraph内の用語をボタンに置換したものをtmpに代入する
-         tmp = paragraph.innerHTML.replace(word_list[j][0], `<a type="button" id='easy-term-auto-${button_num}'>${word_list[j][0]}</a>`);
+         tmp = paragraph.innerHTML.replace(word_list[j]['word'], `<a type="button" id='easy-term-auto-${button_num}'>${word_list[j]['word']}</a>`);
          // paragraphとtmpが異なればparagraphのinnerHTMLをtmpに置換
          if (tmp !== paragraph.innerHTML) {
             paragraph.innerHTML = tmp;
@@ -50,9 +58,13 @@ for (let i=0; i<button_num; i++) {
     let button = document.getElementById(`easy-term-auto-${i}`);
     button.addEventListener('click', function (event) {
         if (popup.style.visibility === 'hidden') {
-            popup.innerText = button.innerText;
-            popup.style.left = event.pageX + 'px';
-            popup.style.top = event.pageY + 'px';
+            for (let j=0; j<word_list.length; j++){
+                if (button.innerText === word_list[j]['word']) {
+                    popup.innerHTML = `<h1>${button.innerText}とは</h1><br><p>${word_list[j]['short_description']}</p>`;
+                }
+            }
+            popup.style.right = 30 + 'px';
+            popup.style.top = 30 + 'px';
             popup.style.visibility = 'visible';
         } else {
             popup.style.visibility = 'hidden';

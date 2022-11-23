@@ -1,0 +1,14 @@
+.easy-term-popup {
+    all: initial;
+    position: fixed;
+    width: 300px;
+    height: 200px;
+    background-color: #ffffff;
+    border: solid;
+    border-radius: 10px;
+    padding: 25px;
+}
+
+.easy-term-popup h1 {
+    font-size: 24px;
+}
