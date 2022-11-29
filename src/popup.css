@@ -1,12 +1,15 @@
 .easy-term-popup {
     all: initial;
     position: fixed;
+    top: 30px;
+    right:30px;
     width: 300px;
     height: 200px;
     background-color: #ffffff;
     border: solid;
     border-radius: 10px;
     padding: 25px;
+    z-index: 10000;
 }
 
 .easy-term-popup h1 {

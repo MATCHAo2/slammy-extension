@@ -7,7 +7,7 @@ const word_list = [
     },
     {
         "id": 6,
-        "word": "Ps",
+        "word": "RAM",
         "short_description": "PhotoShop(フォトショップ)の略称。画像編集ソフトPhotoshop。"
     },
     {
@@ -16,6 +16,20 @@ const word_list = [
         "short_description": "Illustration(イラストレーター)の略称。グラフィックデザインソフト。"
     }
 ];
+
+const word_desc = {
+    "word": "CPU",
+    "detailed_description": "詳しいCPUの説明",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Nintendo_DMG_CPU_1.jpg",
+    "source": "Slamy",
+    "related": [
+        {
+            "id": 6,
+            "word": "RAM"
+        }
+    ]
+}
+
 
 // ボタンのidようにボタンの数を数え上げる
 let button_num = 0;
@@ -63,8 +77,10 @@ for (let i=0; i<button_num; i++) {
                     popup.innerHTML = `<h1>${button.name}とは</h1><br><p>${word_list[j]['short_description']}</p>`;
                 }
             }
-            popup.style.right = 30 + 'px';
-            popup.style.top = 30 + 'px';
+            let extend_btn = document.createElement("a");
+            extend_btn.innerText = "詳細";
+            extend_btn.id = "easy-term-popup-extend_btn";
+            popup.appendChild(extend_btn);
             popup.style.visibility = 'visible';
         } else {
             popup.style.visibility = 'hidden';
