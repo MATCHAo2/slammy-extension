@@ -47,7 +47,7 @@ function buttonBehavior(popup, button_num, word_list) {
         button.addEventListener('click', function (event) {
             if (popup.style.visibility === 'hidden') {
                 popup.style.visibility = 'visible';
-                for (let j=1; j<=word_list.length; j++){
+                for (let j=0; j<word_list.length; j++){
                     if (button.name === word_list[j]['word']) {
                         popup.innerHTML = `<h1>${button.name}とは</h1><br><p>${word_list[j]['short_description']}</p>`;
                     }
