@@ -14,30 +14,58 @@ let wordDesc;
 // ボタンのid用にボタンの数を数え上げる
 let buttonNum = 0;
 
+let paragraph;
+let child;
+let text;
+let newNodes=[];
+let a;
+let i;
+let where;
 
 
 // 関数の定義 //
 // ページ内にボタンを配置する関数
-function setButtonsInPage(paragraphs, word_list) {
-    // paragraphsに入った各要素ごとに処理
-    for (let i=0; i<paragraphs.length; i++) {
+function setButtonsInPage(paragraphs, word) {
+    // paragraphsに入っているノードごとに処理
+    for (i=0; i<paragraphs.length; i++) {
         // paragraphはparagraphsの上からi番目の要素
-        let paragraph = paragraphs[i];
-        let tmp = "";
+        paragraph = paragraphs[i];
 
-        // 単語一つ一つに対して処理
-        for (let j=0; j<word_list.length; j++) {
-            // paragraph内の用語をボタンに置換したものをtmpに代入する
-            tmp = paragraph.innerHTML.replace(word_list[j]['word'], `${word_list[j]['word']}<a type="button" id='easy-term-auto-${buttonNum}' name='${word_list[j]['word']}' style='font-size:30%'>解説</a>`);
-            // paragraphとtmpが異なればparagraphのinnerHTMLをtmpに置換
-            if (tmp !== paragraph.innerHTML) {
-                paragraph.innerHTML = tmp;
-                // buttonNum数え上げ
-                buttonNum += 1;
+        // paragraphの子ノードを一つずつ処理
+        for (let j=0; j<paragraph.childNodes.length; j++) {
+            // childはparagraphの子ノード
+            child = paragraph.childNodes[j];
+            // textはparagraphのテキスト
+            text = child.textContent;
+            // whereは単語がtextの中で出てくる位置
+            where = text.indexOf(word);
+            newNodes = [];
+            if(where !== -1) {
+                // textに用語が含まれていれば新しいテキストノードとaタグの子要素を作成する
+                newText = text.substr(0, where+word.length);
+                newText2 = text.substr(where+word.length);
+                newNodes.push(document.createTextNode(newText));
+                a = document.createElement('a');
+                a.text = '解説';
+                a.id = `easy-term-auto-${buttonNum}`;
+                a.name = word;
+                a.style.fontSize = '30%';
+                newNodes.push(document.createTextNode(newText2));
+
+                // paragraphの新しいchildと置き換える古いchildを削除
+                paragraph.removeChild(child);
+
+                // paragraphに新しいテキストノードを挿入する
+                paragraph.insertBefore(newNodes[1], paragraph.childNodes[j]);
+                console.log(newNodes[1]);
+                paragraph.insertBefore(a, paragraph.childNodes[j]);
+                paragraph.insertBefore(newNodes[0], paragraph.childNodes[j]);
+                console.log(paragraph.childNodes);
+                buttonNum++;
+                j += 2;
             }
         }
-
-    } //paragraphs[i]の処理終わり
+    }
 }
 
 // ボタンクリックを監視し、クリック時の動作を決める
@@ -75,10 +103,13 @@ fetch(apiUrl + "words",{method: "GET"})
 .then(json => {
     // wordListにjsonを代入しておく
     wordList = json;
-    // ページ内にボタンを配置する
-    setButtonsInPage(paragraphs, json);
-    // ボタン押下時の挙動を設定する
-    buttonBehavior(popup, buttonNum, json);
+    // json内の単語一つずつ、ページ内にボタンを配置する
+    for (let word in json) {
+        // ページ内にボタンを配置する
+        setButtonsInPage(paragraphs, json[word]['word']);
+        // ボタン押下時の挙動を設定する
+        buttonBehavior(popup, buttonNum, json[word]['word']);
+    }
 });
 
 
