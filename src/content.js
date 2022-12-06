@@ -39,29 +39,35 @@ function setButtonsInPage(paragraphs, word) {
             text = child.textContent;
             // whereは単語がtextの中で出てくる位置
             where = text.indexOf(word);
+            // newNodesを空にしておく
             newNodes = [];
             if(where !== -1) {
                 // textに用語が含まれていれば新しいテキストノードとaタグの子要素を作成する
+                // textを用語以前と用語より後に分割し、それぞれnewTextとnewText2に代入する
                 newText = text.substr(0, where+word.length);
                 newText2 = text.substr(where+word.length);
-                newNodes.push(document.createTextNode(newText));
+                // aタグのノードを作成する
                 a = document.createElement('a');
                 a.text = '解説';
                 a.id = `easy-term-auto-${buttonNum}`;
                 a.name = word;
                 a.style.fontSize = '30%';
+                // 新しいノードをnewNodesにまとめておく
+                newNodes.push(document.createTextNode(newText)) 
+                newNodes.push(a);
                 newNodes.push(document.createTextNode(newText2));
 
                 // paragraphの新しいchildと置き換える古いchildを削除
                 paragraph.removeChild(child);
 
                 // paragraphに新しいテキストノードを挿入する
-                paragraph.insertBefore(newNodes[1], paragraph.childNodes[j]);
-                console.log(newNodes[1]);
-                paragraph.insertBefore(a, paragraph.childNodes[j]);
-                paragraph.insertBefore(newNodes[0], paragraph.childNodes[j]);
-                console.log(paragraph.childNodes);
+                for (let x=newNodes.length-1; x>=0; x--) {
+                    paragraph.insertBefore(newNodes[x], paragraph.childNodes[j]);
+                }
+
+                // HTMLタグのid用の変数を数え上げ
                 buttonNum++;
+                // 新しい要素が2つ追加されているので、jを2繰り上げ
                 j += 2;
             }
         }
