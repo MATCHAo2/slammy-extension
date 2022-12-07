@@ -98,11 +98,6 @@ function buttonBehavior(popup, button_num, word_list) {
 let popup = document.createElement('div');
 popup.setAttribute('class', 'easy-term-popup');
 document.body.appendChild(popup);
-// ポップアップの詳細ボタン生成
-let extend_btn = document.createElement("a");
-extend_btn.innerText = "詳細";
-extend_btn.id = "easy-term-popup-extend_btn";
-popup.appendChild(extend_btn);
 
 // APIから用語リスト取得
 fetch(apiUrl + "words",{method: "GET"})
