@@ -1,8 +1,8 @@
 {
-    "name": "EasyTerm",
+    "name": "Slamy",
     "version": "0.1.0",
     "manifest_version": 3,
-    "description": "A chrome extension for displaying difficult words about IT and DX.",
+    "description": "A chrome extension for displaying difficult words' explanations about IT and DX.",
     "content_scripts": [
         {
             "matches": [
@@ -17,12 +17,17 @@
         }
     ],
     "permissions": ["scripting"],
-    "optional_permissions": ["tabs"],
+    "optional_permissions": [],
     "host_permissions": ["<all_urls>"],
     "content_security_policy": { 
         "extension_pages": "script-src 'self'; object-src 'self'"
     },
     "action": {
-        "default_popup": "popup.html"
+        "default_icon": "icon48.png"
+    },
+    "icons" : {
+        "16": "icon16.png",
+        "48": "icon48.png",
+        "128": "icon128.png"
     }
 }
