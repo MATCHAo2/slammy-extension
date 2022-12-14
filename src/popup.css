@@ -4,15 +4,19 @@
     top: 30px;
     right:30px;
     width: 300px;
-    height: 200px;
+    height: 150px;
     background-color: #ffffff;
     border: solid;
     border-radius: 10px;
     padding: 25px;
     z-index: 10000;
     visibility: hidden;
+    font-family: 'Zen Maru Gothic', sans-serif ;
+    font-weight: 400;
 }
 
 .easy-term-popup h1 {
     font-size: 24px;
+    font-family: 'Zen Maru Gothic', sans-serif ;
+    font-weight: 500;
 }
