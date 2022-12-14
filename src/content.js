@@ -24,6 +24,12 @@ let where;
 
 
 // 関数の定義 //
+// 引数に与えられた文字列が日本語であるかどうかを判定する関数
+function ja2Bit ( str ) {
+  return ( str.match(/^[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]+$/) )? true : false;
+}
+
+
 // ページ内にボタンを配置する関数
 function setButtonsInPage(paragraphs, word) {
     // paragraphsに入っているノードごとに処理
@@ -46,6 +52,12 @@ function setButtonsInPage(paragraphs, word) {
                 // textを用語以前と用語より後に分割し、それぞれnewTextとnewText2に代入する
                 newText = text.substr(0, where+word.length);
                 newText2 = text.substr(where+word.length);
+                // newText2の1文字目が日本語でない場合、ここより下の行は実行しない
+                let first_char = newText2.charAt(1);
+                console.log(first_char);
+                if (!ja2Bit(first_char)) {
+                    continue;
+                }
                 // aタグのノードを作成する
                 a = document.createElement('a');
                 a.text = '解説';
