@@ -95,7 +95,8 @@ function buttonBehavior(popup, button_num, word_list) {
                 popup.style.visibility = 'visible';
                 for (let j=0; j<word_list.length; j++){
                     if (button.name === word_list[j]['word']) {
-                        popup.innerHTML = `<h1>${button.name}とは</h1><br><p>${word_list[j]['short_description']}</p>`;
+                        popup.setAttribute('name', word_list[j]['id']);
+                        popup.innerHTML = `<h1>${button.name}とは</h1><br><p>${word_list[j]['short_description']}</p><br><a id="easy-term-description-button">詳細</a><br><p id="easy-term-description"></p>`;
                     }
                 }
             } else {
