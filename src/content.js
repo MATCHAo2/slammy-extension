@@ -109,6 +109,7 @@ function buttonBehavior(popup, button_num, word_list) {
 // ポップアップ生成
 let popup = document.createElement('div');
 popup.setAttribute('class', 'easy-term-popup');
+popup.style.visibility = "hidden";
 document.body.appendChild(popup);
 
 // APIから用語リスト取得
