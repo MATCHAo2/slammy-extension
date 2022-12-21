@@ -54,8 +54,8 @@ function setButtonsInPage(paragraphs, word) {
                 newText2 = text.substr(where+word.length);
                 // newText2の1文字目が日本語でない場合、ここより下の行は実行しない
                 let first_char = newText2.charAt(1);
-                console.log(first_char);
-                if (!ja2Bit(first_char)) {
+                let last_char = newText.charAt(newText.length);
+                if (!ja2Bit(first_char) && !ja2Bit(last_char)) {
                     continue;
                 }
                 // aタグのノードを作成する
