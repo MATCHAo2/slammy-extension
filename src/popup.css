@@ -5,6 +5,7 @@
     right:30px;
     width: 300px;
     height: 150px;
+    overflow:scroll;
     background-color: #ffffff;
     border: solid;
     border-radius: 10px;
@@ -19,4 +20,7 @@
     font-size: 24px;
     font-family: 'Zen Maru Gothic', sans-serif ;
     font-weight: 500;
+    /*position: fixed;
+    background-color: #ffffff;
+    width: 300px;*/
 }
