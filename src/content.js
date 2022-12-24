@@ -103,12 +103,14 @@ function buttonBehavior(popup, button_num, word_list) {
                 }
             } else {
                 popup.style.visibility = 'hidden';
+                document.getElementById('easy-term-detailed-description').innerText = "";
             }
         });
     }
 }
 
-// p要素解析 //
+
+
 // ポップアップ生成
 let popup = document.createElement('div');
 popup.setAttribute('id', 'easy-term-popup');
