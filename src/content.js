@@ -159,5 +159,8 @@ let desc_button = document.getElementById("easy-term-description-button");
 desc_button.addEventListener('click', function(event) {
     let word_id = popup_element.getAttribute('name');
     fetch(apiUrl + "words/" + word_id, {method: "GET"})
-    .then(response => console.log(response));
+    .then(response => response.json())
+    .then(json => {
+        document.getElementById("easy-term-detailed-description").innerText = json['detailed_description'];
+    });
 });
