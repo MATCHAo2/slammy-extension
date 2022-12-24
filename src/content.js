@@ -96,7 +96,8 @@ function buttonBehavior(popup, button_num, word_list) {
                 for (let j=0; j<word_list.length; j++){
                     if (button.name === word_list[j]['word']) {
                         popup.setAttribute('name', word_list[j]['id']);
-                        popup.innerHTML = `<h1>${button.name}とは</h1><br><p>${word_list[j]['short_description']}</p><br><a id="easy-term-description-button">詳細</a><br><p id="easy-term-description"></p>`;
+                        document.getElementById('easy-term-header').innerText = word_list[j]['word'];
+                        document.getElementById('easy-term-short-description').innerText = word_list[j]['short_description'];
                     }
                 }
             } else {
@@ -109,8 +110,30 @@ function buttonBehavior(popup, button_num, word_list) {
 // p要素解析 //
 // ポップアップ生成
 let popup = document.createElement('div');
-popup.setAttribute('class', 'easy-term-popup');
+popup.setAttribute('id', 'easy-term-popup');
 popup.style.visibility = "hidden";
+
+let popupHeader = document.createElement('h1');
+popupHeader.setAttribute('id', 'easy-term-header');
+popup.appendChild(popupHeader);
+
+let popupShortDesc = document.createElement('p');
+popupShortDesc.setAttribute('id', 'easy-term-short-description');
+popup.appendChild(popupShortDesc);
+
+let popupDescBtn = document.createElement('a');
+popupDescBtn.setAttribute('id', 'easy-term-description-button');
+popupDescBtn.innerText = '詳細';
+popup.appendChild(popupDescBtn);
+
+let popupDetailDesc = document.createElement('p');
+popupDetailDesc.setAttribute('id', 'easy-term-detailed-description');
+popup.appendChild(popupDetailDesc);
+
+let popupImgDesc = document.createElement('img');
+popupImgDesc.setAttribute('id', 'easy-term-image');
+popup.appendChild(popupImgDesc);
+
 document.body.appendChild(popup);
 
 // APIから用語リスト取得
@@ -129,5 +152,12 @@ fetch(apiUrl + "words",{method: "GET"})
 });
 
 
-
-
+// 「詳細」ボタン押下時の挙動
+let popup_element = document.getElementById("easy-term-popup");
+let word_id = Number(popup_element.getAttribute('name'));
+let desc_button = document.getElementById("easy-term-description-button");
+// イベントリスナ
+desc_button.addEventListener('click', function(event) {
+    fetch(apiUrl + "words/" + word_id, {method: "GET"})
+    .then(response => console.log(response.json()));
+});
