@@ -96,6 +96,7 @@ function buttonBehavior(popup, button_num, word_list) {
                 for (let j=0; j<word_list.length; j++){
                     if (button.name === word_list[j]['word']) {
                         popup.setAttribute('name', word_list[j]['id']);
+                        console.log(word_list[j]['id']);
                         document.getElementById('easy-term-header').innerText = word_list[j]['word'];
                         document.getElementById('easy-term-short-description').innerText = word_list[j]['short_description'];
                     }
@@ -140,8 +141,6 @@ document.body.appendChild(popup);
 fetch(apiUrl + "words",{method: "GET"})
 .then(response => response.json())
 .then(json => {
-    // wordListにjsonを代入しておく
-    wordList = json;
     // json内の単語一つずつ、ページ内にボタンを配置する
     for (let word in json) {
         // ページ内にボタンを配置する
@@ -158,6 +157,7 @@ let word_id = Number(popup_element.getAttribute('name'));
 let desc_button = document.getElementById("easy-term-description-button");
 // イベントリスナ
 desc_button.addEventListener('click', function(event) {
+    let word_id = popup_element.getAttribute('name');
     fetch(apiUrl + "words/" + word_id, {method: "GET"})
-    .then(response => console.log(response.json()));
+    .then(response => console.log(response));
 });
