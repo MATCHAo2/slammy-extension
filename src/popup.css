@@ -11,6 +11,8 @@
     padding: 25px;
     z-index: 10000;
     visibility: hidden;
+    overflow-x: scroll;
+    overflow-y: hidden;
 }
 
 .easy-term-popup h1 {
