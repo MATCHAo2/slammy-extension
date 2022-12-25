@@ -24,6 +24,12 @@ let where;
 
 
 // 関数の定義 //
+// 引数に与えられた文字列が日本語であるかどうかを判定する関数
+function ja2Bit ( str ) {
+  return ( str.match(/^[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]+$/) )? true : false;
+}
+
+
 // ページ内にボタンを配置する関数
 function setButtonsInPage(paragraphs, word) {
     // paragraphsに入っているノードごとに処理
@@ -46,6 +52,12 @@ function setButtonsInPage(paragraphs, word) {
                 // textを用語以前と用語より後に分割し、それぞれnewTextとnewText2に代入する
                 newText = text.substr(0, where+word.length);
                 newText2 = text.substr(where+word.length);
+                // newText2の1文字目が日本語でない場合、ここより下の行は実行しない
+                let first_char = newText2.charAt(1);
+                let last_char = newText.charAt(newText.length);
+                if (!ja2Bit(first_char) && !ja2Bit(last_char)) {
+                    continue;
+                }
                 // aタグのノードを作成する
                 a = document.createElement('a');
                 a.text = '解説';
@@ -83,28 +95,54 @@ function buttonBehavior(popup, button_num, word_list) {
                 popup.style.visibility = 'visible';
                 for (let j=0; j<word_list.length; j++){
                     if (button.name === word_list[j]['word']) {
-                        popup.innerHTML = `<h1>${button.name}とは</h1><br><p>${word_list[j]['short_description']}</p>`;
+                        popup.setAttribute('name', word_list[j]['id']);
+                        console.log(word_list[j]['id']);
+                        document.getElementById('easy-term-header').innerText = word_list[j]['word'];
+                        document.getElementById('easy-term-short-description').innerText = word_list[j]['short_description'];
                     }
                 }
             } else {
                 popup.style.visibility = 'hidden';
+                document.getElementById('easy-term-detailed-description').innerText = "";
             }
         });
     }
 }
 
-// p要素解析 //
+
+
 // ポップアップ生成
 let popup = document.createElement('div');
-popup.setAttribute('class', 'easy-term-popup');
+popup.setAttribute('id', 'easy-term-popup');
+popup.style.visibility = "hidden";
+
+let popupHeader = document.createElement('h1');
+popupHeader.setAttribute('id', 'easy-term-header');
+popup.appendChild(popupHeader);
+
+let popupShortDesc = document.createElement('p');
+popupShortDesc.setAttribute('id', 'easy-term-short-description');
+popup.appendChild(popupShortDesc);
+
+let popupDescBtn = document.createElement('a');
+popupDescBtn.setAttribute('id', 'easy-term-description-button');
+popupDescBtn.innerText = '詳細';
+popup.appendChild(popupDescBtn);
+
+let popupDetailDesc = document.createElement('p');
+popupDetailDesc.setAttribute('id', 'easy-term-detailed-description');
+popup.appendChild(popupDetailDesc);
+
+let popupImgDesc = document.createElement('img');
+popupImgDesc.setAttribute('id', 'easy-term-image');
+popup.appendChild(popupImgDesc);
+
 document.body.appendChild(popup);
 
 // APIから用語リスト取得
 fetch(apiUrl + "words",{method: "GET"})
 .then(response => response.json())
 .then(json => {
-    // wordListにjsonを代入しておく
-    wordList = json;
     // json内の単語一つずつ、ページ内にボタンを配置する
     for (let word in json) {
         // ページ内にボタンを配置する
@@ -115,5 +153,16 @@ fetch(apiUrl + "words",{method: "GET"})
 });
 
 
-
-
+// 「詳細」ボタン押下時の挙動
+let popup_element = document.getElementById("easy-term-popup");
+let word_id = Number(popup_element.getAttribute('name'));
+let desc_button = document.getElementById("easy-term-description-button");
+// イベントリスナ
+desc_button.addEventListener('click', function(event) {
+    let word_id = popup_element.getAttribute('name');
+    fetch(apiUrl + "words/" + word_id, {method: "GET"})
+    .then(response => response.json())
+    .then(json => {
+        document.getElementById("easy-term-detailed-description").innerText = json['detailed_description'];
+    });
+});
