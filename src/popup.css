@@ -25,14 +25,14 @@
     width: 300px;*/
 }
 
-.batsu {
+#easy-term-popup-cross {
     display: block;
     position: relative;
     width: 30px;
     height: 30px;
   }
    
-  .batsu::before, .batsu::after { /* 共通設定 */
+  #easy-term-popup-cross::before, #easy-term-popup-cross::after { /* 共通設定 */
     content: "";
     position: absolute;
     top: 50%;
@@ -42,10 +42,10 @@
     background: #333;
   }
    
-  .batsu::before {
+  #easy-term-popup-cross::before {
     transform: translate(-50%,-50%) rotate(45deg);
   }
    
-  .batsu::after {
+  #easy-term-popup-cross::after {
     transform: translate(-50%,-50%) rotate(-45deg);
   }
