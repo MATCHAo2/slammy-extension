@@ -16,7 +16,7 @@
             ]
         }
     ],
-    "permissions": ["scripting"],
+    "permissions": [],
     "optional_permissions": [],
     "host_permissions": ["<all_urls>"],
     "content_security_policy": { 
