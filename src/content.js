@@ -154,15 +154,20 @@ fetch(apiUrl + "words",{method: "GET"})
 
 
 // 「詳細」ボタン押下時の挙動
-let popup_element = document.getElementById("easy-term-popup");
-let word_id = Number(popup_element.getAttribute('name'));
-let desc_button = document.getElementById("easy-term-description-button");
+let popupElement = document.getElementById("easy-term-popup");
+let wordId = Number(popupElement.getAttribute('name'));
+let descButton = document.getElementById("easy-term-description-button");
+let descParagraph = document.getElementById("easy-term-detailed-description");
+descParagraph.style.visibility = 'hidden';
 // イベントリスナ
-desc_button.addEventListener('click', function(event) {
-    let word_id = popup_element.getAttribute('name');
-    fetch(apiUrl + "words/" + word_id, {method: "GET"})
-    .then(response => response.json())
-    .then(json => {
-        document.getElementById("easy-term-detailed-description").innerText = json['detailed_description'];
-    });
+descButton.addEventListener('click', function(event) {
+    if (descParagraph.style.visibility === 'hidden') {
+        fetch(apiUrl + "words/" + wordId, {method: "GET"})
+        .then(response => response.json())
+        .then(json => {
+            descParagraph.innerText = json['detailed_description'];
+        });
+    } else {
+        descParagraph.style.visibility = 'hidden';
+    }
 });
