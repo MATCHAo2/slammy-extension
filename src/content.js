@@ -120,6 +120,10 @@ let popupHeader = document.createElement('h1');
 popupHeader.setAttribute('id', 'easy-term-header');
 popup.appendChild(popupHeader);
 
+let popupCross = document.createElement('span');
+popupCross.setAttribute('id', 'easy-term-popup-cross');
+popup.appendChild(popupCross);
+
 let popupShortDesc = document.createElement('p');
 popupShortDesc.setAttribute('id', 'easy-term-short-description');
 popup.appendChild(popupShortDesc);
@@ -138,6 +142,11 @@ popupImgDesc.setAttribute('id', 'easy-term-image');
 popup.appendChild(popupImgDesc);
 
 document.body.appendChild(popup);
+
+//x(cross)ボタン押下時の挙動
+popupCross.addEventListener('click', function (event) {
+    popup.style.visibility = 'hidden';
+});
 
 // APIから用語リスト取得
 fetch(apiUrl + "words",{method: "GET"})
