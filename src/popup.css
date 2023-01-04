@@ -27,9 +27,13 @@
 
 #easy-term-popup-cross {
     display: block;
-    position: relative;
-    width: 30px;
-    height: 30px;
+    position: fixed;/*fixedを設定して固定*/
+    z-index: 999;/*最前面へ*/
+    top: 40px;;/*位置指定*/
+    right: 60px;/*位置指定*/
+    width: 20px;
+    height: 20px;
+    background: #333;
   }
    
   #easy-term-popup-cross::before, #easy-term-popup-cross::after { /* 共通設定 */
@@ -37,9 +41,9 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 5px; /* 棒の幅（太さ） */
-    height: 30px; /* 棒の高さ */
-    background: #333;
+    width: 3px; /* 棒の幅（太さ） */
+    height: 15px; /* 棒の高さ */
+    background: #fff;
   }
    
   #easy-term-popup-cross::before {
