@@ -31,9 +31,8 @@
     z-index: 999;/*最前面へ*/
     top: 40px;;/*位置指定*/
     right: 60px;/*位置指定*/
-    width: 20px;
+    width: 30px;
     height: 20px;
-    background: #333;
   }
    
   #easy-term-popup-cross::before, #easy-term-popup-cross::after { /* 共通設定 */
@@ -41,15 +40,8 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 3px; /* 棒の幅（太さ） */
-    height: 15px; /* 棒の高さ */
-    background: #fff;
-  }
-   
-  #easy-term-popup-cross::before {
-    transform: translate(-50%,-50%) rotate(45deg);
-  }
-   
-  #easy-term-popup-cross::after {
-    transform: translate(-50%,-50%) rotate(-45deg);
+    width: 5px; /* 棒の幅（太さ） */
+    height: 30px; /* 棒の高さ */
+    background: #333;
+    border-radius: 2.5px;
   }
