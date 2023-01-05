@@ -6,7 +6,7 @@ function save_configs() {
         slammyIsUse: isUse
     }, function() {
         let message = document.getElementById('easy-term-config-message');
-        message.innerText = '保存しました!';
+        message.innerText = '保存しました!再読み込みで反映されます!';
     });
 }
 
