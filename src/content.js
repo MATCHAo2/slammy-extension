@@ -92,8 +92,8 @@ function buttonBehavior(popup, button_num, word_list) {
     for (let i=0; i<button_num; i++) {
         let button = document.getElementById(`easy-term-auto-${i}`);
         button.addEventListener('click', function (event) {
-            if (popup.style.visibility === 'hidden') {
-                popup.style.visibility = 'visible';
+            if (popup.style.display === 'none') {
+                popup.style.display = 'block';
                 for (let j=0; j<word_list.length; j++){
                     if (button.name === word_list[j]['word']) {
                         popup.setAttribute('name', word_list[j]['id']);
@@ -103,7 +103,7 @@ function buttonBehavior(popup, button_num, word_list) {
                     }
                 }
             } else {
-                popup.style.visibility = 'hidden';
+                popup.style.display = 'none';
                 document.getElementById('easy-term-detailed-description').innerText = "";
             }
         });
@@ -115,26 +115,11 @@ function buttonBehavior(popup, button_num, word_list) {
 
 // ~~~~~~~~~~~~~~実際の処理~~~~~~~~~~~~~~ //
 
-/* 解説ボタンの配置 */
-// APIから用語リストを取得し、解説ボタンをHTML内に配置する
-fetch(apiUrl + "words",{method: "GET"})
-.then(response => response.json())
-.then(json => {
-    // json内の単語一つずつ、ページ内にボタンを配置する
-    for (let word in json) {
-        // ページ内にボタンを配置する
-        setButtonsInPage(paragraphs, json[word]['word']);
-    }
-    // ボタン押下時の挙動を設定する
-    buttonBehavior(popup, buttonNum, json);
-});
-/* 解説ボタンの配置 終 */
-
 /* ポップアップ生成 */
 // ポップアップの要素生成
 let popup = document.createElement('div');
 popup.setAttribute('id', 'easy-term-popup');
-popup.style.visibility = "hidden";
+popup.style.display = 'none';
 
 // ポップアップのヘッダー
 let popupHeader = document.createElement('header');
@@ -151,18 +136,21 @@ popupHeader.appendChild(popupCross);
 // ポップアップのヘッダーをポップアップの子要素に追加
 popup.appendChild(popupHeader);
 
-// ポップアップの説明の部分
-let popupDesc = document.createElement('div');
-popupDesc.setAttribute('id', 'easy-term-popup-description');
+let popupAllDesc = document.createElement('div');
+popupAllDesc.setAttribute('id', 'easy-term-popup-all-description');
 
 let popupShortDesc = document.createElement('p');
 popupShortDesc.setAttribute('id', 'easy-term-short-description');
-popupDesc.appendChild(popupShortDesc);
+popupAllDesc.appendChild(popupShortDesc);
 
 let popupDescBtn = document.createElement('a');
 popupDescBtn.setAttribute('id', 'easy-term-description-button');
 popupDescBtn.innerText = '詳細';
-popupDesc.appendChild(popupDescBtn);
+popupAllDesc.appendChild(popupDescBtn);
+
+// ポップアップの詳細説明の部分
+let popupDesc = document.createElement('div');
+popupDesc.setAttribute('id', 'easy-term-popup-description');
 
 let popupDetailDesc = document.createElement('p');
 popupDetailDesc.setAttribute('id', 'easy-term-detailed-description');
@@ -172,8 +160,11 @@ let popupImgDesc = document.createElement('img');
 popupImgDesc.setAttribute('id', 'easy-term-image');
 popupDesc.appendChild(popupImgDesc);
 
-// 説明部分をポップアップの子要素に追加
-popup.appendChild(popupDesc);
+// 説明部分をpopupAllDescの子要素に追加
+popupAllDesc.appendChild(popupDesc);
+
+// popupAllDescをpopupに追加
+popup.appendChild(popupAllDesc);
 
 // ポップアップをHTMLの子要素に追加
 document.body.appendChild(popup);
@@ -182,30 +173,43 @@ document.body.appendChild(popup);
 let popupElement = document.getElementById("easy-term-popup");
 let wordId = Number(popupElement.getAttribute('name'));
 let descButton = document.getElementById("easy-term-description-button");
-let descParagraph = document.getElementById("easy-term-detailed-description");
-descParagraph.style.visibility = 'hidden';
 // イベントリスナ
 descButton.addEventListener('click', function(event) {
     // 解説ボタンが配置されたタイミングで、各ボタンのname属性が用語のidになるので、それを取得する
-    wordId = Number(popupElement.getAttribute('name'));
+    wordId = Number(popup.getAttribute('name'));
     // 詳細解説が表示されていない場合、APIから説明を持ってくる
-    if (descParagraph.style.visibility === 'hidden') {
+    if (popupDesc.style.display === 'none') {
+        popupDesc.style.display = 'block';
         fetch(apiUrl + "words/" + wordId, {method: "GET"})
         .then(response => response.json())
         .then(json => {
-            descParagraph.innerText = json['detailed_description'];
-            descParagraph.style.visibility = 'visible';
+            document.getElementById('easy-term-detailed-description').innerText = json['detailed_description'];            
         });
     // 詳細解説が表示されている場合、詳細解説を非表示にする
     } else {
-        descParagraph.style.visibility = 'hidden';
+        popupDesc.style.display = 'none';
     }
 });
 /* 「詳細」ボタン押下時の挙動 終 */
 
-/* x(cross)ボタン押下時の挙動 */
-popupCross.addEventListener('click', function (event) {
-    popup.style.visibility = 'hidden';
-});
-/* x(cross)ボタン押下時の挙動 終 */
 /* ポップアップ生成オワリ */
+
+/* 解説ボタンの配置 */
+// APIから用語リストを取得し、解説ボタンをHTML内に配置する
+fetch(apiUrl + "words",{method: "GET"})
+.then(response => response.json())
+.then(json => {
+    // json内の単語一つずつ、ページ内にボタンを配置する
+    for (let word in json) {
+        // ページ内にボタンを配置する
+        setButtonsInPage(paragraphs, json[word]['word']);
+    }
+    // ボタン押下時の挙動を設定する
+    buttonBehavior(popup, buttonNum, json);
+    /* x(cross)ボタン押下時の挙動 */
+    popupCross.addEventListener('click', function (event) {
+        popup.style.display = 'none';
+    });
+    /* x(cross)ボタン押下時の挙動 終 */
+});
+/* 解説ボタンの配置 終 */
