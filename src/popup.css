@@ -4,7 +4,8 @@
     top: 30px;
     right:30px;
     width: 300px;
-    height: 200px;
+    height: 150px;
+    overflow:scroll;
     background-color: #ffffff;
     border: solid;
     border-radius: 10px;
@@ -13,9 +14,41 @@
     visibility: hidden;
     overflow-y: scroll;
     overflow-x: hidden;
+    font-family: 'Zen Maru Gothic', sans-serif ;
+    font-weight: 400;
 }
 
 #easy-term-popup h1 {
     font-size: 24px;
     position: fixed;
+    font-family: 'Zen Maru Gothic', sans-serif ;
+    font-weight: 500;
+    /*position: fixed;
+    background-color: #ffffff;
+    width: 300px;*/
 }
+
+#easy-term-popup-cross {
+    display: block;
+    position: relative;
+    width: 30px;
+    height: 30px;
+  }
+   
+  #easy-term-popup-cross::before, #easy-term-popup-cross::after { /* 共通設定 */
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px; /* 棒の幅（太さ） */
+    height: 30px; /* 棒の高さ */
+    background: #333;
+  }
+   
+  #easy-term-popup-cross::before {
+    transform: translate(-50%,-50%) rotate(45deg);
+  }
+   
+  #easy-term-popup-cross::after {
+    transform: translate(-50%,-50%) rotate(-45deg);
+  }
