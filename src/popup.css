@@ -24,8 +24,6 @@
     font-family: 'Zen Maru Gothic', sans-serif ;
     font-weight: 500;
     background-color: white;
-    width:100%;
-    padding: 10px;
     /*position: fixed;
     background-color: #ffffff;
     width: 300px;*/
@@ -33,7 +31,14 @@
 
 #easy-term-header {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: fixed;
+    width: 300px;
+    box-sizing:border-box;
+    top: 33px;
+    background-color: #ffffff;
+    z-index:20;
 }
 
 #easy-term-popup-cross {
@@ -60,3 +65,11 @@
   #easy-term-popup-cross::after {
     transform: translate(-50%,-50%) rotate(-45deg);
   }
+
+#easy-term-popup-description {
+    position: absolute;
+    top: 70px;
+    z-index:10;
+    width: 300px;
+}
+

@@ -97,7 +97,7 @@ function buttonBehavior(popup, button_num, word_list) {
                     if (button.name === word_list[j]['word']) {
                         popup.setAttribute('name', word_list[j]['id']);
                         console.log(word_list[j]['id']);
-                        document.getElementById('easy-term-header').innerText = word_list[j]['word'];
+                        document.getElementById('easy-term-header-text').innerText = word_list[j]['word'];
                         document.getElementById('easy-term-short-description').innerText = word_list[j]['short_description'];
                     }
                 }
@@ -116,30 +116,41 @@ let popup = document.createElement('div');
 popup.setAttribute('id', 'easy-term-popup');
 popup.style.visibility = "hidden";
 
-let popupHeader = document.createElement('h1');
+// ポップアップのヘッダー
+let popupHeader = document.createElement('header');
 popupHeader.setAttribute('id', 'easy-term-header');
-popup.appendChild(popupHeader);
+
+let popupHeaderText = document.createElement('h1');
+popupHeaderText.setAttribute('id', 'easy-term-header-text');
+popupHeader.appendChild(popupHeaderText);
 
 let popupCross = document.createElement('span');
 popupCross.setAttribute('id', 'easy-term-popup-cross');
-popup.appendChild(popupCross);
+popupHeader.appendChild(popupCross);
+
+popup.appendChild(popupHeader);
+
+let popupDesc = document.createElement('div');
+popupDesc.setAttribute('id', 'easy-term-popup-description');
 
 let popupShortDesc = document.createElement('p');
 popupShortDesc.setAttribute('id', 'easy-term-short-description');
-popup.appendChild(popupShortDesc);
+popupDesc.appendChild(popupShortDesc);
 
 let popupDescBtn = document.createElement('a');
 popupDescBtn.setAttribute('id', 'easy-term-description-button');
 popupDescBtn.innerText = '詳細';
-popup.appendChild(popupDescBtn);
+popupDesc.appendChild(popupDescBtn);
 
 let popupDetailDesc = document.createElement('p');
 popupDetailDesc.setAttribute('id', 'easy-term-detailed-description');
-popup.appendChild(popupDetailDesc);
+popupDesc.appendChild(popupDetailDesc);
 
 let popupImgDesc = document.createElement('img');
 popupImgDesc.setAttribute('id', 'easy-term-image');
-popup.appendChild(popupImgDesc);
+popupDesc.appendChild(popupImgDesc);
+
+popup.appendChild(popupDesc);
 
 document.body.appendChild(popup);
 
