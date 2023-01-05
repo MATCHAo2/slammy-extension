@@ -170,11 +170,13 @@ let descParagraph = document.getElementById("easy-term-detailed-description");
 descParagraph.style.visibility = 'hidden';
 // イベントリスナ
 descButton.addEventListener('click', function(event) {
+    wordId = Number(popupElement.getAttribute('name'));
     if (descParagraph.style.visibility === 'hidden') {
         fetch(apiUrl + "words/" + wordId, {method: "GET"})
         .then(response => response.json())
         .then(json => {
             descParagraph.innerText = json['detailed_description'];
+            descParagraph.style.visibility = 'visible';
         });
     } else {
         descParagraph.style.visibility = 'hidden';
