@@ -20,12 +20,20 @@
 
 #easy-term-popup h1 {
     font-size: 24px;
-    position: fixed;
+    top: 0;
     font-family: 'Zen Maru Gothic', sans-serif ;
     font-weight: 500;
+    background-color: white;
+    width:100%;
+    padding: 10px;
     /*position: fixed;
     background-color: #ffffff;
     width: 300px;*/
+}
+
+#easy-term-header {
+    display: flex;
+    position: fixed;
 }
 
 #easy-term-popup-cross {
@@ -39,7 +47,7 @@
     content: "";
     position: absolute;
     top: 50%;
-    left: 50%;
+    right: 10%;
     width: 5px; /* 棒の幅（太さ） */
     height: 30px; /* 棒の高さ */
     background: #333;
