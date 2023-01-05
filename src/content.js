@@ -1,4 +1,4 @@
-// 変数の定義 //
+// ~~~~~~~~~~変数の定義~~~~~~~~~~~~~ //
 // APIのURL
 const apiUrl = "https://slamy.tech/api/v1/";
 
@@ -21,9 +21,10 @@ let newNodes=[];
 let a;
 let i;
 let where;
+// ~~~~~~~~~~~~変数定義 終~~~~~~~~~~~ //
 
 
-// 関数の定義 //
+// ~~~~~~~~~~~~関数の定義~~~~~~~~~~~~ //
 // 引数に与えられた文字列が日本語であるかどうかを判定する関数
 function ja2Bit ( str ) {
   return ( str.match(/^[\u30a0-\u30ff\u3040-\u309f\u3005-\u3006\u30e0-\u9fcf]+$/) )? true : false;
@@ -109,9 +110,28 @@ function buttonBehavior(popup, button_num, word_list) {
     }
 }
 
+// ~~~~~~~~~~~~~~関数定義 終~~~~~~~~~~~~~~ //
 
 
-// ポップアップ生成
+// ~~~~~~~~~~~~~~実際の処理~~~~~~~~~~~~~~ //
+
+/* 解説ボタンの配置 */
+// APIから用語リストを取得し、解説ボタンをHTML内に配置する
+fetch(apiUrl + "words",{method: "GET"})
+.then(response => response.json())
+.then(json => {
+    // json内の単語一つずつ、ページ内にボタンを配置する
+    for (let word in json) {
+        // ページ内にボタンを配置する
+        setButtonsInPage(paragraphs, json[word]['word']);
+    }
+    // ボタン押下時の挙動を設定する
+    buttonBehavior(popup, buttonNum, json);
+});
+/* 解説ボタンの配置 終 */
+
+/* ポップアップ生成 */
+// ポップアップの要素生成
 let popup = document.createElement('div');
 popup.setAttribute('id', 'easy-term-popup');
 popup.style.visibility = "hidden";
@@ -128,8 +148,10 @@ let popupCross = document.createElement('span');
 popupCross.setAttribute('id', 'easy-term-popup-cross');
 popupHeader.appendChild(popupCross);
 
+// ポップアップのヘッダーをポップアップの子要素に追加
 popup.appendChild(popupHeader);
 
+// ポップアップの説明の部分
 let popupDesc = document.createElement('div');
 popupDesc.setAttribute('id', 'easy-term-popup-description');
 
@@ -150,30 +172,13 @@ let popupImgDesc = document.createElement('img');
 popupImgDesc.setAttribute('id', 'easy-term-image');
 popupDesc.appendChild(popupImgDesc);
 
+// 説明部分をポップアップの子要素に追加
 popup.appendChild(popupDesc);
 
+// ポップアップをHTMLの子要素に追加
 document.body.appendChild(popup);
 
-//x(cross)ボタン押下時の挙動
-popupCross.addEventListener('click', function (event) {
-    popup.style.visibility = 'hidden';
-});
-
-// APIから用語リスト取得
-fetch(apiUrl + "words",{method: "GET"})
-.then(response => response.json())
-.then(json => {
-    // json内の単語一つずつ、ページ内にボタンを配置する
-    for (let word in json) {
-        // ページ内にボタンを配置する
-        setButtonsInPage(paragraphs, json[word]['word']);
-    }
-    // ボタン押下時の挙動を設定する
-    buttonBehavior(popup, buttonNum, json);
-});
-
-
-// 「詳細」ボタン押下時の挙動
+/* 「詳細」ボタン押下時の挙動 */
 let popupElement = document.getElementById("easy-term-popup");
 let wordId = Number(popupElement.getAttribute('name'));
 let descButton = document.getElementById("easy-term-description-button");
@@ -181,7 +186,9 @@ let descParagraph = document.getElementById("easy-term-detailed-description");
 descParagraph.style.visibility = 'hidden';
 // イベントリスナ
 descButton.addEventListener('click', function(event) {
+    // 解説ボタンが配置されたタイミングで、各ボタンのname属性が用語のidになるので、それを取得する
     wordId = Number(popupElement.getAttribute('name'));
+    // 詳細解説が表示されていない場合、APIから説明を持ってくる
     if (descParagraph.style.visibility === 'hidden') {
         fetch(apiUrl + "words/" + wordId, {method: "GET"})
         .then(response => response.json())
@@ -189,7 +196,16 @@ descButton.addEventListener('click', function(event) {
             descParagraph.innerText = json['detailed_description'];
             descParagraph.style.visibility = 'visible';
         });
+    // 詳細解説が表示されている場合、詳細解説を非表示にする
     } else {
         descParagraph.style.visibility = 'hidden';
     }
 });
+/* 「詳細」ボタン押下時の挙動 終 */
+
+/* x(cross)ボタン押下時の挙動 */
+popupCross.addEventListener('click', function (event) {
+    popup.style.visibility = 'hidden';
+});
+/* x(cross)ボタン押下時の挙動 終 */
+/* ポップアップ生成オワリ */
