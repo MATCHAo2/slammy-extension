@@ -11,18 +11,37 @@
     border-radius: 10px;
     padding: 25px;
     z-index: 10000;
-    visibility: hidden;
+    overflow-y: scroll;
+    overflow-x: hidden;
     font-family: 'Zen Maru Gothic', sans-serif ;
     font-weight: 400;
 }
 
-.easy-term-popup h1 {
+#easy-term-popup-all-description {
+    display: block;
+}
+
+#easy-term-popup h1 {
     font-size: 24px;
+    top: 0;
     font-family: 'Zen Maru Gothic', sans-serif ;
     font-weight: 500;
+    background-color: white;
     /*position: fixed;
     background-color: #ffffff;
     width: 300px;*/
+}
+
+#easy-term-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    width: 300px;
+    box-sizing:border-box;
+    top: 33px;
+    background-color: #ffffff;
+    z-index:20;
 }
 
 #easy-term-popup-cross {
@@ -53,3 +72,11 @@
   #easy-term-popup-cross::after {
     transform: translate(-50%,-50%) rotate(-45deg);
   }
+
+#easy-term-popup-all-description {
+    top: 70px;
+    display: block;
+    position: absolute;
+    z-index:10;
+    width: 300px;
+}
