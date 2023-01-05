@@ -97,7 +97,6 @@ function buttonBehavior(popup, button_num, word_list) {
                 for (let j=0; j<word_list.length; j++){
                     if (button.name === word_list[j]['word']) {
                         popup.setAttribute('name', word_list[j]['id']);
-                        console.log(word_list[j]['id']);
                         document.getElementById('easy-term-header-text').innerText = word_list[j]['word'];
                         document.getElementById('easy-term-short-description').innerText = word_list[j]['short_description'];
                     }
@@ -114,7 +113,9 @@ function buttonBehavior(popup, button_num, word_list) {
 
 
 // ~~~~~~~~~~~~~~実際の処理~~~~~~~~~~~~~~ //
-
+// chromeのlocalstorageから値を取得
+chrome.storage.local.get('slammyIsUse', function(event){
+    if (event.slammyIsUse) {
 /* ポップアップ生成 */
 // ポップアップの要素生成
 let popup = document.createElement('div');
@@ -214,3 +215,5 @@ fetch(apiUrl + "words",{method: "GET"})
     /* x(cross)ボタン押下時の挙動 終 */
 });
 /* 解説ボタンの配置 終 */
+}
+});
