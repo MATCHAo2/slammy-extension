@@ -1,6 +1,6 @@
 {
-    "name": "Slamy",
-    "version": "0.1.0",
+    "name": "Slammy",
+    "version": "0.2.0",
     "manifest_version": 3,
     "description": "A chrome extension for displaying difficult words' explanations about IT and DX.",
     "content_scripts": [
@@ -16,14 +16,17 @@
             ]
         }
     ],
-    "permissions": [],
+    "permissions": [
+        "storage"
+    ],
     "optional_permissions": [],
     "host_permissions": ["<all_urls>"],
     "content_security_policy": { 
         "extension_pages": "script-src 'self'; object-src 'self'"
     },
     "action": {
-        "default_icon": "icon48.png"
+        "default_icon": "icon48.png",
+        "default_popup": "settings.html"
     },
     "icons" : {
         "16": "icon16.png",
