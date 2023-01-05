@@ -209,6 +209,7 @@ fetch(apiUrl + "words",{method: "GET"})
     /* x(cross)ボタン押下時の挙動 */
     popupCross.addEventListener('click', function (event) {
         popup.style.display = 'none';
+        popupDesc.style.display = 'none';
     });
     /* x(cross)ボタン押下時の挙動 終 */
 });
