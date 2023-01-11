@@ -105,6 +105,7 @@ function buttonBehavior(popup, button_num, word_list) {
             } else {
                 popup.style.display = 'none';
                 document.getElementById('easy-term-detailed-description').innerText = "";
+                popup.style.height = "150px";
             }
         });
     }
@@ -184,10 +185,12 @@ descButton.addEventListener('click', function(event) {
         .then(response => response.json())
         .then(json => {
             document.getElementById('easy-term-detailed-description').innerText = json['detailed_description'];            
+            popup.style.height = "300px";
         });
     // 詳細解説が表示されている場合、詳細解説を非表示にする
     } else {
         popupDesc.style.display = 'none';
+        popup.style.height = "150px";
     }
 });
 /* 「詳細」ボタン押下時の挙動 終 */
@@ -210,6 +213,7 @@ fetch(apiUrl + "words",{method: "GET"})
     popupCross.addEventListener('click', function (event) {
         popup.style.display = 'none';
         popupDesc.style.display = 'none';
+        popup.style.height = "150px";
     });
     /* x(cross)ボタン押下時の挙動 終 */
 });
