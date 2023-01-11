@@ -146,7 +146,7 @@ popupAllDesc.appendChild(popupShortDesc);
 
 let popupDescBtn = document.createElement('a');
 popupDescBtn.setAttribute('id', 'easy-term-description-button');
-popupDescBtn.innerText = '詳細';
+popupDescBtn.innerText = '- 詳細 -';
 popupAllDesc.appendChild(popupDescBtn);
 
 // ポップアップの詳細説明の部分

@@ -22,10 +22,12 @@
 }
 
 #easy-term-popup h1 {
-    font-size: 24px;
+    font-size: 1.25vw;
+    padding: 5px;
+    white-space: nowrap;
     top: 0;
     font-family: 'Zen Maru Gothic', sans-serif ;
-    font-weight: 500;
+    font-weight: 600;
     background-color: white;
     /*position: fixed;
     background-color: #ffffff;
@@ -49,7 +51,7 @@
     position: fixed;/*fixedを設定して固定*/
     z-index: 999;/*最前面へ*/
     top:50px;;/*位置指定*/
-    right: 63px;/*位置指定*/
+    right: 50px;/*位置指定*/
     width: 30px;
     height: 20px;
   }
