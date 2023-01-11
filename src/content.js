@@ -116,6 +116,12 @@ function buttonBehavior(popup, button_num, word_list) {
 // chromeのlocalstorageから値を取得
 chrome.storage.local.get('slammyIsUse', function(event){
     if (event.slammyIsUse) {
+/* フォントの読み込み */
+let font = document.createElement('link');
+font.setAttribute('href', 'https://fonts.googleapis.com/css?family=Zen+Maru+Gothic');
+font.setAttribute('rel', 'stylesheet');
+document.body.appendChild(font);
+
 /* ポップアップ生成 */
 // ポップアップの要素生成
 let popup = document.createElement('div');
