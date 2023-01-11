@@ -1,5 +1,5 @@
 #easy-term-popup {
-    all: initial;
+    all:initial;
     position: fixed;
     top: 30px;
     right:30px;
@@ -17,13 +17,40 @@
     font-weight: 400;
 }
 
-#easy-term-popup-all-description {
-    display: block;
+#easy-term-description-button {
+  margin: 5px 0;
+  /*margin-bottom :5px;*/
+  font-family: 'Zen Maru Gothic', sans-serif ;
+  border-radius:28px;
+  border-width:1px ;
+  border-color:#ffffff;
+  background-color: #f1f1f1;
+  color: darkblue;
+  font-size: small;
+  font-weight: 400;
+  padding:2px;
 }
 
+#easy-term-detailed-description {
+    all: initial;
+    font-size: small;
+    font-family: 'Zen Maru Gothic', sans-serif ;
+    padding: 10px;
+}
+
+
+/*#easy-term-short-description {
+  all: initial;
+  font-family: 'Zen Maru Gothic', sans-serif ;
+  padding: 5px;
+}*/
+
+
 #easy-term-popup h1 {
+  all: initial;
     font-size: 1.25vw;
     padding: 5px;
+    padding-top: 20px;
     white-space: nowrap;
     top: 0;
     font-family: 'Zen Maru Gothic', sans-serif ;
@@ -35,13 +62,14 @@
 }
 
 #easy-term-header {
+    all:initial;
     display: flex;
     justify-content: space-between;
     align-items: center;
     position: fixed;
     width: 300px;
     box-sizing:border-box;
-    top: 33px;
+    top: 32px;
     background-color: #ffffff;
     z-index:20;
 }
@@ -50,8 +78,8 @@
     display: block;
     position: fixed;/*fixedを設定して固定*/
     z-index: 999;/*最前面へ*/
-    top:50px;;/*位置指定*/
-    right: 50px;/*位置指定*/
+    top: 32px;/*位置指定*/
+    right: 28px;/*位置指定*/
     width: 30px;
     height: 20px;
   }
@@ -62,7 +90,7 @@
     top: 50%;
     left: 50%;
     width: 2px; /* 棒の幅（太さ） */
-    height: 22px; /* 棒の高さ */
+    height: 15px; /* 棒の高さ */
     background: #333;
     border-radius: 2.5px;
   }

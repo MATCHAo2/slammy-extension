@@ -144,9 +144,9 @@ let popupShortDesc = document.createElement('p');
 popupShortDesc.setAttribute('id', 'easy-term-short-description');
 popupAllDesc.appendChild(popupShortDesc);
 
-let popupDescBtn = document.createElement('a');
+let popupDescBtn = document.createElement('button');
 popupDescBtn.setAttribute('id', 'easy-term-description-button');
-popupDescBtn.innerText = '- 詳細 -';
+popupDescBtn.textContent = '　詳細をみる　';
 popupAllDesc.appendChild(popupDescBtn);
 
 // ポップアップの詳細説明の部分
