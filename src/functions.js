@@ -51,10 +51,15 @@ function setButtonsInPage(paragraphs, word) {
                 }
                 // aタグのノードを作成する
                 a = document.createElement('a');
-                a.text = '解説';
+                a.text = ' 解説 ';
                 a.id = `easy-term-auto-${buttonNum}`;
                 a.name = word;
                 a.style.fontSize = '30%';
+                a.style.color= '#f1f1f1';
+                a.style.fontWeight= '500';
+                a.style.background="darkgreen";
+                a.style.fontFamily= "Zen Maru Gothic";
+                a.style.borderRadius='20px';
                 // 新しいノードをnewNodesにまとめておく
                 newNodes.push(document.createTextNode(newText))
                 newNodes.push(a);
