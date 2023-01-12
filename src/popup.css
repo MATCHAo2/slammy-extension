@@ -29,6 +29,9 @@
   font-size: small;
   font-weight: 500;
   padding:2px;
+  position: relative; /* 現在の位置から */
+  top: 10px; /* 上から~px移動 */
+  left: -10px; /* 左から~px移動 */
 }
 
 #easy-term-detailed-description {
