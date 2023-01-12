@@ -18,16 +18,16 @@
 }
 
 #easy-term-description-button {
-  margin: 5px 0;
+  margin: 10px 0;
   /*margin-bottom :5px;*/
   font-family: 'Zen Maru Gothic', sans-serif ;
   border-radius:28px;
   border-width:1px ;
   border-color:#ffffff;
   background-color: #f1f1f1;
-  color: darkblue;
+  color: darkgreen;
   font-size: small;
-  font-weight: 400;
+  font-weight: 500;
   padding:2px;
 }
 
@@ -54,7 +54,7 @@
     white-space: nowrap;
     top: 0;
     font-family: 'Zen Maru Gothic', sans-serif ;
-    font-weight: 600;
+    font-weight: bold;
     background-color: white;
     /*position: fixed;
     background-color: #ffffff;
