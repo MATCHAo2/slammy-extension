@@ -119,7 +119,7 @@ chrome.storage.local.get('slammyIsUse', function(event){
     if (event.slammyIsUse) {
 /* フォントの読み込み */
 let font = document.createElement('link');
-font.setAttribute('href', 'https://fonts.googleapis.com/css?family=Zen+Maru+Gothic');
+font.setAttribute('href', 'https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;500;700&display=swap');
 font.setAttribute('rel', 'stylesheet');
 document.body.appendChild(font);
 
