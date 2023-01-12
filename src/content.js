@@ -196,13 +196,13 @@ descButton.addEventListener('click', function(event) {
         .then(json => {
             document.getElementById('easy-term-detailed-description').innerText = json['detailed_description'];            
             height = popupAllDesc.clientHeight + popupHeader.clientHeight;
-            popup.style.height = height;
+            popup.style.height = height + "px";
         });
     // 詳細解説が表示されている場合、詳細解説を非表示にする
     } else {
         popupDesc.style.display = 'none';
         height = popupHeader.clientHeight + popupShortDesc.clientHeight + popupDescBtn.clientHeight;
-        popup.style.height = height;
+        popup.style.height = height + 20 + "px";
     }
 });
 /* 「詳細」ボタン押下時の挙動 終 */
