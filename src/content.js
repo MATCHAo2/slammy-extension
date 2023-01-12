@@ -21,6 +21,13 @@ let newNodes=[];
 let a;
 let i;
 let where;
+let height;
+
+// ポップアップの構成要素
+let popup;
+let popupHeader, popupHeaderText, popupCross;
+let popupAllDesc, popupShortDesc, popupDescBtn;
+let popupDesc, popupDetailDesc, popupImgDesc;
 // ~~~~~~~~~~~~変数定義 終~~~~~~~~~~~ //
 
 
@@ -101,10 +108,12 @@ function buttonBehavior(popup, button_num, word_list) {
                         document.getElementById('easy-term-short-description').innerText = word_list[j]['short_description'];
                     }
                 }
+                height = popupAllDesc.clientHeight + popupHeader.clientHeight;
+                console.log(height);
+                popup.style.height = height + "px";
             } else {
                 popup.style.display = 'none';
                 document.getElementById('easy-term-detailed-description').innerText = "";
-                popup.style.height = "150px";
             }
         });
     }
@@ -125,46 +134,46 @@ document.body.appendChild(font);
 
 /* ポップアップ生成 */
 // ポップアップの要素生成
-let popup = document.createElement('div');
+popup = document.createElement('div');
 popup.setAttribute('id', 'easy-term-popup');
 popup.style.display = 'none';
 
 // ポップアップのヘッダー
-let popupHeader = document.createElement('header');
+popupHeader = document.createElement('header');
 popupHeader.setAttribute('id', 'easy-term-header');
 
-let popupHeaderText = document.createElement('h1');
+popupHeaderText = document.createElement('h1');
 popupHeaderText.setAttribute('id', 'easy-term-header-text');
 popupHeader.appendChild(popupHeaderText);
 
-let popupCross = document.createElement('span');
+popupCross = document.createElement('span');
 popupCross.setAttribute('id', 'easy-term-popup-cross');
 popupHeader.appendChild(popupCross);
 
 // ポップアップのヘッダーをポップアップの子要素に追加
 popup.appendChild(popupHeader);
 
-let popupAllDesc = document.createElement('div');
+popupAllDesc = document.createElement('div');
 popupAllDesc.setAttribute('id', 'easy-term-popup-all-description');
 
-let popupShortDesc = document.createElement('p');
+popupShortDesc = document.createElement('p');
 popupShortDesc.setAttribute('id', 'easy-term-short-description');
 popupAllDesc.appendChild(popupShortDesc);
 
-let popupDescBtn = document.createElement('button');
+popupDescBtn = document.createElement('button');
 popupDescBtn.setAttribute('id', 'easy-term-description-button');
 popupDescBtn.textContent = '　詳細をみる　';
 popupAllDesc.appendChild(popupDescBtn);
 
 // ポップアップの詳細説明の部分
-let popupDesc = document.createElement('div');
+popupDesc = document.createElement('div');
 popupDesc.setAttribute('id', 'easy-term-popup-description');
 
-let popupDetailDesc = document.createElement('p');
+popupDetailDesc = document.createElement('p');
 popupDetailDesc.setAttribute('id', 'easy-term-detailed-description');
 popupDesc.appendChild(popupDetailDesc);
 
-let popupImgDesc = document.createElement('img');
+popupImgDesc = document.createElement('img');
 popupImgDesc.setAttribute('id', 'easy-term-image');
 popupDesc.appendChild(popupImgDesc);
 
@@ -192,12 +201,14 @@ descButton.addEventListener('click', function(event) {
         .then(response => response.json())
         .then(json => {
             document.getElementById('easy-term-detailed-description').innerText = json['detailed_description'];            
-            popup.style.height = "300px";
+            height = popupAllDesc.clientHeight + popupHeader.clientHeight;
+            popup.style.height = height + "px";
         });
     // 詳細解説が表示されている場合、詳細解説を非表示にする
     } else {
         popupDesc.style.display = 'none';
-        popup.style.height = "150px";
+        height = popupHeader.clientHeight + popupShortDesc.clientHeight + popupDescBtn.clientHeight;
+        popup.style.height = height + 20 + "px";
     }
 });
 /* 「詳細」ボタン押下時の挙動 終 */
@@ -215,12 +226,15 @@ fetch(apiUrl + "words",{method: "GET"})
         setButtonsInPage(paragraphs, json[word]['word']);
     }
     // ボタン押下時の挙動を設定する
-    buttonBehavior(popup, buttonNum, json);
+    height = popupHeader.clientHeight + popupShortDesc.clientHeight + popupDescBtn.clientHeight;
+    console.log(height);
+    buttonBehavior(popup, buttonNum, json)
     /* x(cross)ボタン押下時の挙動 */
     popupCross.addEventListener('click', function (event) {
         popup.style.display = 'none';
         popupDesc.style.display = 'none';
-        popup.style.height = "150px";
+        height = popupAllDesc.clientHeight + popupShortDesc.clientHeight;
+        popup.style.height = height + "px";
     });
     /* x(cross)ボタン押下時の挙動 終 */
 });
