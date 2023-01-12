@@ -152,8 +152,12 @@ fetch(apiUrl + "words",{method: "GET"})
 
 
 /* ポップアップ外をクリックするとポップアップが非表示になる */
+// chromeのlocalに保存したパラメータから設定を読み込む
+chrome.storage.local.get('closeOption', function(event){
 /* bodyに対してイベントリスナを追加する */
 document.body.addEventListener('click', function (e) {
+    if (event.closeOption) {
+        console.log(event.closeOption);
     // クリックした要素のidを取得
     let clicked = e.target.id;
     let regexp = new RegExp("easy-term.*");
@@ -164,6 +168,8 @@ document.body.addEventListener('click', function (e) {
             closePopup(popup, popupDesc, height);
         }
     }
+    }
+});
 });
 }
 });
