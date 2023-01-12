@@ -168,6 +168,7 @@ popupAllDesc.appendChild(popupDescBtn);
 // ポップアップの詳細説明の部分
 popupDesc = document.createElement('div');
 popupDesc.setAttribute('id', 'easy-term-popup-description');
+popupDesc.style.display = 'none';
 
 popupDetailDesc = document.createElement('p');
 popupDetailDesc.setAttribute('id', 'easy-term-detailed-description');
