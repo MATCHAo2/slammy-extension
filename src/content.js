@@ -169,7 +169,7 @@ document.body.addEventListener('click', function (e) {
         if (popup.style.display != "none") {
             height = popupHeader.clientHeight + popupDescBtn.clientHeader + popupShortDesc;
             closePopup(popup, popupDesc, height);
-            popupDescBtn.textContent = '　詳細をみる　';
+            popupDescBtn.textContent = '　詳細をとじる　';
         }
     }
     }
