@@ -23,6 +23,8 @@ let i;
 let where;
 let height;
 
+let wordId;
+
 // ポップアップの構成要素
 let popup;
 let popupHeader, popupHeaderText, popupCross;
@@ -97,11 +99,9 @@ popup.appendChild(popupAllDesc);
 document.body.appendChild(popup);
 
 /* 「詳細」ボタン押下時の挙動 */
-let popupElement = document.getElementById("easy-term-popup");
-let wordId = Number(popupElement.getAttribute('name'));
 let descButton = document.getElementById("easy-term-description-button");
 // イベントリスナ
-descButton.addEventListener('click', function(event) {
+popupDescBtn.addEventListener('click', function(event) {
     // 解説ボタンが配置されたタイミングで、各ボタンのname属性が用語のidになるので、それを取得する
     wordId = Number(popup.getAttribute('name'));
     // 詳細解説が表示されていない場合、APIから説明を持ってくる
@@ -117,6 +117,7 @@ descButton.addEventListener('click', function(event) {
     // 詳細解説が表示されている場合、詳細解説を非表示にする
     } else {
         popupDesc.style.display = 'none';
+        // ポップアップの高さを調整する
         height = popupHeader.clientHeight + popupShortDesc.clientHeight + popupDescBtn.clientHeight;
         popup.style.height = height + 20 + "px";
     }
@@ -141,13 +142,28 @@ fetch(apiUrl + "words",{method: "GET"})
     buttonBehavior(popup, buttonNum, json, height)
     /* x(cross)ボタン押下時の挙動 */
     popupCross.addEventListener('click', function (event) {
-        popup.style.display = 'none';
-        popupDesc.style.display = 'none';
-        height = popupAllDesc.clientHeight + popupShortDesc.clientHeight;
-        popup.style.height = height + "px";
-    });
+        height = popupHeader.clientHeight + popupDescBtn.clientHeight + popupShortDesc.clientHeight;
+        closePopup(popup, popupDesc, height);
+    }
+    );
     /* x(cross)ボタン押下時の挙動 終 */
 });
 /* 解説ボタンの配置 終 */
+
+
+/* ポップアップ外をクリックするとポップアップが非表示になる */
+/* bodyに対してイベントリスナを追加する */
+document.body.addEventListener('click', function (e) {
+    // クリックした要素のidを取得
+    let clicked = e.target.id;
+    let regexp = new RegExp("easy-term.*");
+    // 要素のidがeasy-termから始まる物でなければ、popupを閉じる関数を実行する
+    if (!regexp.test(clicked))  {
+        if (popup.style.display != "none") {
+            height = popupHeader.clientHeight + popupDescBtn.clientHeader + popupShortDesc;
+            closePopup(popup, popupDesc, height);
+        }
+    }
+});
 }
 });
