@@ -2,7 +2,7 @@
 // 保存ボタンを押されたときにchromeのlocal storageに設定項目を保存
 function save_configs() {
     let isUse = document.getElementById('easy-term-config-is-use').checked;
-    let closeOption = document.getElementById('easy-term-config-close-option');
+    let closeOption = document.getElementById('easy-term-config-close-option').checked;
     chrome.storage.local.set({
         slammyIsUse: isUse,
         closeOption: closeOption
