@@ -9,7 +9,8 @@
                 "<all_urls>"
             ],
             "js": [
-                "content.js"
+                "content.js",
+                "functions.js"
             ],
             "css": [
                 "popup.css"
