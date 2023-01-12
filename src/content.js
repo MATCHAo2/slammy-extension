@@ -114,12 +114,14 @@ popupDescBtn.addEventListener('click', function(event) {
             height = popupAllDesc.clientHeight + popupHeader.clientHeight;
             popup.style.height = height + "px";
         });
+        popupDescBtn.textContent = '　詳細をとじる　';
     // 詳細解説が表示されている場合、詳細解説を非表示にする
     } else {
         popupDesc.style.display = 'none';
         // ポップアップの高さを調整する
         height = popupHeader.clientHeight + popupShortDesc.clientHeight + popupDescBtn.clientHeight;
         popup.style.height = height + 20 + "px";
+        popupDescBtn.textContent = '　詳細をみる　';
     }
 });
 /* 「詳細」ボタン押下時の挙動 終 */
@@ -144,6 +146,7 @@ fetch(apiUrl + "words",{method: "GET"})
     popupCross.addEventListener('click', function (event) {
         height = popupHeader.clientHeight + popupDescBtn.clientHeight + popupShortDesc.clientHeight;
         closePopup(popup, popupDesc, height);
+        popupDescBtn.textContent = '　詳細をみる　';
     }
     );
     /* x(cross)ボタン押下時の挙動 終 */
@@ -166,6 +169,7 @@ document.body.addEventListener('click', function (e) {
         if (popup.style.display != "none") {
             height = popupHeader.clientHeight + popupDescBtn.clientHeader + popupShortDesc;
             closePopup(popup, popupDesc, height);
+            popupDescBtn.textContent = '　詳細をみる　';
         }
     }
     }
